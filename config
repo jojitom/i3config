@@ -1,0 +1,161 @@
+# ================================
+#   Minimal i3 Configuration
+#   Sharp, clean, small animations
+# ================================
+
+set $mod Mod1
+
+# Font (clean and minimal)
+font pango:IBM Plex Mono
+
+# Primary Monitor
+exec --no-startup-id xrandr --output DP-0 --primary
+
+# Disable borders unless focused
+for_window [class=".*"] border pixel 2
+
+# Gaps (small)
+gaps inner 6
+gaps outer 10
+
+# Terminal
+bindsym $mod+Return exec kitty
+
+# Compositor (transparency)
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+# File Manager
+bindsym $mod+e exec kitty -e ranger
+
+# Exit i3
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3?' -b 'Yes' 'i3-msg exit'"
+
+# Kill focused window
+bindsym $mod+Shift+q kill
+
+# Launcher
+bindsym $mod+d exec rofi -show drun
+
+# Focus
+bindsym $mod+Left focus left
+bindsym $mod+Right focus right
+bindsym $mod+Up focus up
+bindsym $mod+Down focus down
+
+# Move windows
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Down move down
+
+# Split modes
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+# Reload / Restart
+bindsym $mod+Shift+r restart
+
+# Primary Monitor
+exec --no-startup-id xrandr --output DP-0 --primary
+
+# Pre-create primary workspaces so they are always visible
+exec --no-startup-id i3-msg workspace 1
+exec --no-startup-id i3-msg workspace 2
+exec --no-startup-id i3-msg workspace 3
+exec --no-startup-id i3-msg workspace 4
+
+# Workspaces
+# Output mapping
+
+    set $primary DP-0
+    set $secondary HDMI-0
+
+    workspace 1 output $primary
+    workspace 2 output $primary
+    workspace 3 output $primary
+    workspace 4 output $primary
+
+    workspace 5 output $secondary
+    workspace 6 output $secondary
+    workspace 7 output $secondary
+    workspace 8 output $secondary
+
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
+    bindsym $mod+4 workspace 4
+
+    bindsym $mod+5 workspace 5
+    bindsym $mod+6 workspace 6
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+
+    # Move to workspace with window
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
+    bindsym $mod+Shift+4 move container to workspace 4
+
+    bindsym $mod+Shift+5 move container to workspace 5
+    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+
+
+# Window borders & colors
+default_border pixel 2
+
+client.focused          #ff8c00 #0b0b0b #cfcfcf #ff8c00 #ff8c00
+client.focused_inactive #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
+client.unfocused        #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
+client.urgent           #ff8c00 #ff8c00 #000000 #ff8c00 #ff8c00
+client.placeholder      #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
+
+
+# Bar (clean + simple)
+bar {
+    output DP-0
+    position top
+    status_command i3blocks -c ~/.config/i3blocks/config
+    tray_output none
+
+    colors {
+        background #0b0b0b
+        statusline #cfcfcf
+        separator  #7a7a7a
+
+        focused_workspace  #ff8c00 #0b0b0b #ff8c00
+        active_workspace   #0b0b0b #0b0b0b #cfcfcf
+        inactive_workspace #0b0b0b #0b0b0b #7a7a7a
+        urgent_workspace   #ff8c00 #ff8c00 #000000
+    }
+}
+
+
+# Start compositor (minimal animations)
+    exec --no-startup-id picom --config ~/.config/picom/picom.conf
+
+# Wallpaper
+    exec --no-startup-id feh --bg-fill ~/.config/wall.jpg
+
+# KDE polkit agent
+    exec --no-startup-id /usr/libexec/polkit-kde-authentication-agent-1
+
+# Clipboard
+    exec --no-startup-id klipper
+
+# Network Manager tray
+    exec --no-startup-id nm-applet
+
+
+# Wallpaper Selection
+    exec --no-startup-id feh --bg-fill ~/Documents/Delta/archive/Wallpapers/wallhaven-34xrl4_2560x1440.png
+
+    exec --no-startup-id xset s off -dpms
+
+# Program Shortcuts
+    bindsym $mod+o exec --no-startup-id flatpak run md.obsidian.Obsidian
+
+
+# Keyboard Layout (2 languages)
+    exec --no-startup-id setxkbmap -layout us,gr -option 'grp:caps_toggle'
