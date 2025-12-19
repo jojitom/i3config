@@ -6,10 +6,10 @@
 set $mod Mod1
 
 # Font (clean and minimal)
-font pango:IBM Plex Mono
+font pango:JetBrainsMono Nerd Font 11
 
 # Primary Monitor
-exec --no-startup-id xrandr --output DP-0 --primary
+exec_always --no-startup-id xrandr --output DP-0 --primary
 
 # Disable borders unless focused
 for_window [class=".*"] border pixel 2
@@ -105,18 +105,20 @@ exec --no-startup-id i3-msg workspace 4
 # Window borders & colors
 default_border pixel 2
 
-client.focused          #ff8c00 #0b0b0b #cfcfcf #ff8c00 #ff8c00
-client.focused_inactive #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
-client.unfocused        #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
-client.urgent           #ff8c00 #ff8c00 #000000 #ff8c00 #ff8c00
-client.placeholder      #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
+client.focused            #ff8c00 #0b0b0b #cfcfcf #ff8c00 #ff8c00
+client.focused_inactive   #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
+client.unfocused          #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
+client.urgent             #ff8c00 #ff8c00 #000000 #ff8c00 #ff8c00
+client.placeholder        #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
 
 
-# Bar (clean + simple)
+# TOP BAR
 bar {
     output DP-0
     position top
+    workspace_buttons no
     status_command i3blocks -c ~/.config/i3blocks/config
+    binding_mode_indicator no    
     tray_output none
 
     colors {
@@ -131,12 +133,29 @@ bar {
     }
 }
 
+# BOTTOM BAR
+bar {
+    id bar_bottom
+    output DP-0
+    position bottom
+    status_command i3blocks -c ~/.config/i3blocks/config.bottom
+    tray_output none
+    
+    colors {
+        background #0b0b0b
+        statusline #cfcfcf
+        separator  #7a7a7a
+
+        focused_workspace  #ff8c00 #0b0b0b #ff8c00
+        active_workspace   #0b0b0b #0b0b0b #cfcfcf
+        inactive_workspace #0b0b0b #0b0b0b #7a7a7a
+        urgent_workspace   #ff8c00 #ff8c00 #000000
+	}
+}
 
 # Start compositor (minimal animations)
-    exec --no-startup-id picom --config ~/.config/picom/picom.conf
-
-# Wallpaper
-    exec --no-startup-id feh --bg-fill ~/.config/wall.jpg
+    # Start picom safely (delayed)
+exec --no-startup-id sh -c "sleep 1 && picom --config ~/.config/picom/picom.conf"
 
 # KDE polkit agent
     exec --no-startup-id /usr/libexec/polkit-kde-authentication-agent-1
@@ -147,10 +166,8 @@ bar {
 # Network Manager tray
     exec --no-startup-id nm-applet
 
-
 # Wallpaper Selection
-    exec --no-startup-id feh --bg-fill ~/Documents/Delta/archive/Wallpapers/wallhaven-34xrl4_2560x1440.png
-
+    exec --no-startup-id feh --bg-fill /home/joji/Documents/Delta/archive/Wallpapers/wallhaven-34xrl4_2560x1440.png
     exec --no-startup-id xset s off -dpms
 
 # Program Shortcuts
