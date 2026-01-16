@@ -4,23 +4,28 @@ separator=true
 separator_block_width=20
 markup=pango
 
-
 [window]
 command=i3-msg -t get_tree | jq -r '.. | select(.focused? == true).name // empty'
 interval=1
-min_width="                                                                                                                                                                                                                                                                   "
+min_width=""
 align=left
 separator=true
 
 [clock]
-command=date '+<span foreground="#ff8c00">%H:%M</span>'
+command=date '+<span foreground="#4c8dff">%H:%M</span>'
 interval=1
 align=center
 
-[updates]
-command=$HOME/.config/i3blocks/scripts/updates.sh
-interval=1800
-markup=pango
+[memory]
+command=free -h | awk '/Mem:/ {printf "<span foreground=\"#e7ecf2\">󰆼 [RAM]: </span><span foreground=\"#e7ecf2\">%s / %s</span>\n", $3, $2}'
+interval=5
+align=right
+
+[ethernet]
+command=/home/joji/.config/i3blocks/scripts/net-traffic.sh
+interval=1
+align=right
+color=#cfcfcf
 
 [power]
 command=/home/joji/.config/i3blocks/scripts/power-block.sh
