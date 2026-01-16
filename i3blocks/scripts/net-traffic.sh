@@ -18,4 +18,4 @@ TX_BYTES=$((TX2 - TX1))
 RX_Mbps=$(echo "scale=1; ($RX_BYTES * 8) / 1000000" | bc)
 TX_Mbps=$(echo "scale=1; ($TX_BYTES * 8) / 1000000" | bc)
 
-echo "<span foreground=\"#ffffff\">󰒍 [NET]: </span><span foreground=\"#ff8c00\">↓ ${RX_Mbps}Mbps ↑ ${TX_Mbps}Mbps</span>"
+echo "<span foreground=\"#ffffff\">󰒍 [NET]: </span><span foreground=\"#e7ecf2\">↓ ${RX_Mbps}Mbps ↑ ${TX_Mbps}Mbps</span>"
