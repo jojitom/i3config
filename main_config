@@ -6,7 +6,7 @@
 set $mod Mod1
 
 # Font (clean and minimal)
-font pango:JetBrainsMono Nerd Font 11
+font pango:JetBrainsMono Nerd Font 12
 
 # Primary Monitor
 exec_always --no-startup-id xrandr --output DP-0 --primary
@@ -51,6 +51,8 @@ bindsym $mod+Shift+Down move down
 # Split modes
 bindsym $mod+h split h
 bindsym $mod+v split v
+
+bindsym $mod+Shift+c exec --no-startup-id kitty -e vim ~/.config/i3/config
 
 # Reload / Restart
 bindsym $mod+Shift+r restart
@@ -105,52 +107,30 @@ exec --no-startup-id i3-msg workspace 4
 # Window borders & colors
 default_border pixel 2
 
-client.focused            #ff8c00 #0b0b0b #cfcfcf #ff8c00 #ff8c00
-client.focused_inactive   #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
-client.unfocused          #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
-client.urgent             #ff8c00 #ff8c00 #000000 #ff8c00 #ff8c00
-client.placeholder        #1a1a1a #0b0b0b #7a7a7a #1a1a1a #1a1a1a
-
+client.focused           #4C8DFF #12161B #E7ECF2 #4C8DFF #4C8DFF
+client.focused_inactive  #2A3340 #12161B #A7B0BC #2A3340 #2A3340
+client.unfocused         #2A3340 #0B0D10 #A7B0BC #2A3340 #2A3340
+client.urgent            #6AA3FF #12161B #E7ECF2 #6AA3FF #6AA3FF
+client.placeholder       #2A3340 #0B0D10 #6F7A88 #2A3340 #2A3340
 
 # TOP BAR
 bar {
     output DP-0
     position top
-    workspace_buttons no
     status_command i3blocks -c ~/.config/i3blocks/config
-    binding_mode_indicator no    
+    binding_mode_indicator no
     tray_output none
 
     colors {
-        background #0b0b0b
-        statusline #cfcfcf
-        separator  #7a7a7a
+        background         #0B0D10
+        statusline         #E7ECF2
+        separator          #2A3340
 
-        focused_workspace  #ff8c00 #0b0b0b #ff8c00
-        active_workspace   #0b0b0b #0b0b0b #cfcfcf
-        inactive_workspace #0b0b0b #0b0b0b #7a7a7a
-        urgent_workspace   #ff8c00 #ff8c00 #000000
+        focused_workspace  #4C8DFF #4C8DFF #E7ECF2
+        active_workspace   #2A3340 #1B2129 #E7ECF2
+        inactive_workspace #2A3340 #0B0D10 #A7B0BC
+        urgent_workspace   #6AA3FF #12161B #E7ECF2
     }
-}
-
-# BOTTOM BAR
-bar {
-    id bar_bottom
-    output DP-0
-    position bottom
-    status_command i3blocks -c ~/.config/i3blocks/config.bottom
-    tray_output none
-    
-    colors {
-        background #0b0b0b
-        statusline #cfcfcf
-        separator  #7a7a7a
-
-        focused_workspace  #ff8c00 #0b0b0b #ff8c00
-        active_workspace   #0b0b0b #0b0b0b #cfcfcf
-        inactive_workspace #0b0b0b #0b0b0b #7a7a7a
-        urgent_workspace   #ff8c00 #ff8c00 #000000
-	}
 }
 
 # Start compositor (minimal animations)
@@ -167,7 +147,7 @@ exec --no-startup-id sh -c "sleep 1 && picom --config ~/.config/picom/picom.conf
     exec --no-startup-id nm-applet
 
 # Wallpaper Selection
-    exec --no-startup-id feh --bg-fill /home/joji/Documents/Delta/archive/Wallpapers/wallhaven-34xrl4_2560x1440.png
+    exec --no-startup-id feh --bg-fill /home/joji/Documents/Delta/archive/Wallpapers/wallhaven-qrr5rr_2560x1440.png
     exec --no-startup-id xset s off -dpms
 
 # Program Shortcuts
