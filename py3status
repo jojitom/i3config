@@ -1,0 +1,44 @@
+# py3status configuration file
+# Solarized Osaka theme with correct background color
+
+general {
+    colors = true
+    interval = 5
+    color_good = "#728905"      # Solarized Osaka green
+    color_degraded = "#a57705"  # Solarized Osaka yellow
+    color_bad = "#d01b24"       # Solarized Osaka red
+}
+
+# Display order (left to right)
+order += "cpu_usage"
+order += "memory"
+order += "volume master"
+order += "tztime local"
+
+
+# CPU usage
+cpu_usage {
+    format = "  %usage"
+    max_threshold = 75
+    degraded_threshold = 50
+}
+
+# Memory usage
+memory {
+    format = "  %percentage_used"
+    threshold_degraded = "70%"
+    threshold_critical = "85%"
+}
+
+
+# Volume
+volume master {
+    format = "  %volume"
+    format_muted = "  muted"
+    device = "default"
+}
+
+# Date and time
+tztime local {
+    format = " %d-%m-%Y  %H:%M"
+}
